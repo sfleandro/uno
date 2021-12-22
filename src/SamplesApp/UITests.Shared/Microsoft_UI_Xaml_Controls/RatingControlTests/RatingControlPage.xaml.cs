@@ -85,11 +85,13 @@ namespace UITests.Microsoft_UI_Xaml_Controls.RatingControlTests
 
 			if (ApiInformation.IsTypePresent("Windows.UI.Xaml.Controls.RatingControl"))
 			{
+#if !HAS_UNO
 				var wuxcRatingControl = new Windows.UI.Xaml.Controls.RatingControl();
 				wuxcRatingControl.Name = "WUXC RatingControl";
 				wuxcRatingControl.Caption = "WUXC RatingControl";
 				AutomationProperties.SetAutomationId(wuxcRatingControl, "wuxcRatingControl");
 				this.mainStackPanel.Children.Add(wuxcRatingControl);
+#endif
 			}
 		}
 
