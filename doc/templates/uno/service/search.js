@@ -121,7 +121,7 @@ function enableSearch() {
         }
 
         $("body").on("queryReady", function () {
-            const hits = lunrIndex.search(query);
+            const hits = lunrIndex.search(`${query}*`);
             const results = [];
             hits.forEach(function (hit) {
                 const item = searchData[hit.ref];
@@ -147,12 +147,14 @@ function enableSearch() {
 
         indexReady.promise().done(function () {
 
+            let wildQuery = `${query}*`
+
             $("body").on("query-ready", function () {
-                worker.postMessage({q: query});
+                worker.postMessage({q: wildQuery});
             });
 
             if (query && (query.length >= 3)) {
-                worker.postMessage({q: query});
+                worker.postMessage({q: wildQuery});
             }
 
         }).then(r => r.resolve());
